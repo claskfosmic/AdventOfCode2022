@@ -54,18 +54,47 @@
 # and 19 (s); the sum of these is 157.
 #
 
+import re
+
 class puzzle:
 
+	#
 	def setInput(self, input):
 		self.input = input
 		self.lines = self.input.split("\n")
 
+	#
 	def handleInput(self):
 
 		self.rucksacks = [];
-		
+		for line in self.lines:
+
+			rucksackSize = len(line)
+			compartmentSize = int(rucksackSize / 2)
+
+			self.rucksacks.append([line[0:compartmentSize], line[compartmentSize:rucksackSize]])
 
 		return
+
+	#
+	def getDoubleCharacter(self, compartment1, compartment2):
+
+		intersect = set(compartment1).intersection(compartment2)
+		return list(intersect)[0]
+
+	#
+	def getCharacterPriority(self, character):
+
+		if re.match('[A-Z]', character):
+			return 26 + (ord(character) - ord('A') + 1)
+		else:
+			return (ord(character) - ord('a') + 1)
+
+	#
+	def getBadge(self, rucksack1, rucksack2, rucksack3):
+
+		intersect = set(rucksack1).intersection(rucksack2).intersection(rucksack3)
+		return list(intersect)[0]
 
 	# --- Part One ---
 	#
@@ -74,12 +103,79 @@ class puzzle:
 	#
 	def part1(self):
 
-		return None;
+		prioritySum = 0
+
+		for rucksack in self.rucksacks:
+			doubleCharacter = self.getDoubleCharacter(rucksack[0], rucksack[1])
+			prioritySum += self.getCharacterPriority(doubleCharacter)
+
+		return prioritySum
 
 	# --- Part Two ---
 	#
-	# ...
+	# As you finish identifying the misplaced items, the Elves come to you with
+	# another issue.
+	#
+	# For safety, the Elves are divided into groups of three. Every Elf carries a
+	# badge that identifies their group. For efficiency, within each group of
+	# three Elves, the badge is the only item type carried by all three Elves.
+	# That is, if a group's badge is item type B, then all three Elves will have
+	# item type B somewhere in their rucksack, and at most two of the Elves will
+	# be carrying any other item type.
+	#
+	# The problem is that someone forgot to put this year's updated authenticity
+	# sticker on the badges. All of the badges need to be pulled out of the
+	# rucksacks so the new authenticity stickers can be attached.
+	#
+	# Additionally, nobody wrote down which item type corresponds to each group's
+	# badges. The only way to tell which item type is the right one is by finding
+	# the one item type that is common between all three Elves in each group.
+	#
+	# Every set of three lines in your list corresponds to a single group, but
+	# each group can have a different badge item type. So, in the above example,
+	# the first group's rucksacks are the first three lines:
+	#
+	# vJrwpWtwJgWrhcsFMMfFFhFp
+	# jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
+	# PmmdzqPrVvPwwTWBwg
+	# 
+	# And the second group's rucksacks are the next three lines:
+	#
+	# wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
+	# ttgJtRGJQctTZtZT
+	# CrZsJsPPZsGzwwsLwLmpwMDw
+	# 
+	# In the first group, the only item type that appears in all three rucksacks
+	# is lowercase r; this must be their badges. In the second group, their badge
+	# item type must be Z.
+	#
+	# Priorities for these items must still be found to organize the sticker
+	# attachment efforts: here, they are 18 (r) for the first group and 52 (Z)
+	# for the second group. The sum of these is 70.
+	#
+	# Find the item type that corresponds to the badges of each three-Elf group.
+	# What is the sum of the priorities of those item types?
 	#
 	def part2(self):
 
-		return None;
+		prioritySum = 0
+
+		rucksack1 = None
+		rucksack2 = None
+		rucksack3 = None
+
+		for rucksack in self.rucksacks:
+
+			if rucksack1 == None:
+				rucksack1 = rucksack[0]+""+rucksack[1]
+			elif rucksack2 == None:
+				rucksack2 = rucksack[0]+""+rucksack[1]
+			elif rucksack3 == None:
+				rucksack3 = rucksack[0]+""+rucksack[1]
+
+				badge = self.getBadge(rucksack1, rucksack2, rucksack3)
+				prioritySum += self.getCharacterPriority(badge)
+
+				rucksack1 = rucksack2 = rucksack3 = None
+
+		return prioritySum
