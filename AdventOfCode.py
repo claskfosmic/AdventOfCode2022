@@ -24,6 +24,8 @@ def runAll():
 
 def runDay(day, part=None, runExample=False):
 
+	print("--------------------------------------")
+
 	if(part != None):
 		print("- Run day %d - Part %d:" % (day, part))
 	else:
@@ -83,8 +85,6 @@ def runDay(day, part=None, runExample=False):
 	if part==None or part == 2:
 		answer = puzzle.part2()
 		print("- Answer for day %d - Part 2: %s" % (day, answer))
-
-	print("--------------------------------------")
 
 def runPart(day, part, runExample=False):
 	return runDay(day, part, runExample)

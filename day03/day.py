@@ -106,6 +106,7 @@ class puzzle:
 		prioritySum = 0
 
 		for rucksack in self.rucksacks:
+			
 			doubleCharacter = self.getDoubleCharacter(rucksack[0], rucksack[1])
 			prioritySum += self.getCharacterPriority(doubleCharacter)
 
