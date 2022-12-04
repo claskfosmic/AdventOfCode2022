@@ -10,6 +10,5 @@ Results to far:
 - Answer for day 2 - Part 2: 12091
 --------------------------------------
 - Run day 3:
-- Answer for day 3 - Part 1: None
-- Answer for day 3 - Part 2: None
---------------------------------------
+- Answer for day 3 - Part 1: 8105
+- Answer for day 3 - Part 2: 2363
