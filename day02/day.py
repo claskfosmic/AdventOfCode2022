@@ -77,8 +77,6 @@ class puzzle:
 	#
 	def getScore_guide1(self, abc, xyz):
 
-		print("abc %s vs xyz %s" % (abc, xyz))
-
 		score_player1 = 0
 		score_player2 = 0
 
