@@ -17,19 +17,14 @@
 
 import sys, os
 
-def runAll():
+def runAll(runExample=False):
 
 	for d in range(1, 31):
-		runDay(d)
+		runDay(d, None, runExample)
 
 def runDay(day, part=None, runExample=False):
 
-	print("--------------------------------------")
-
-	if(part != None):
-		print("- Run day %d - Part %d:" % (day, part))
-	else:
-		print("- Run day %d:" % (day))
+	print("-----------------------------------------------------------------")
 
 	directory = "day{:02d}".format(day)
 	if not os.path.exists("./"+directory):
@@ -66,47 +61,119 @@ def runDay(day, part=None, runExample=False):
 	else:
 		input_file = open("./"+directory+"/input.txt", "r")
 
-	puzzle_input = input_file.read().strip()
+	puzzle_input = input_file.read()
 	input_file.close()
 
 	if puzzle_input == "":
 		print("Day %d skipped, input from file was empty" % (day, directory))
 		return
 
+	if(part != None):
+		print("- Day %d, Part %d : \"%s\"" % (day, part, getTitle(day)))
+	else:
+		print("- Day %d : \"%s\"" % (day, getTitle(day)))
+
 	puzzle = puzzle()
 	puzzle.setInput(puzzle_input)
 	puzzle.handleInput()
 
 	if part==None or part == 1:
-		# from day01.solve import day
+
 		answer = puzzle.part1()
-		print("- Answer for day %d - Part 1: %s" % (day, answer))
+		if answer is not None and hasAnswer(day, 1, answer, runExample):
+			if checkAnswer(day, 1, answer, runExample):
+				print("- Answer for day %d, part 1:\t\033[92m✓\033[00m %s" % (day, answer))
+			else:
+				print("- Answer for day %d, part 1:\t\033[91mx\033[00m %s" % (day, answer))
+		else:
+			print("- Answer for day %d, part 1:\t\033[93m?\033[00m %s" % (day, answer))
 
 	if part==None or part == 2:
+		
 		answer = puzzle.part2()
-		print("- Answer for day %d - Part 2: %s" % (day, answer))
+		if answer is not None and hasAnswer(day, 2, answer, runExample):
+			if(checkAnswer(day, 2, answer, runExample)):
+				print("- Answer for day %d, part 2:\t\033[92m✓\033[00m %s" % (day, answer))
+			else:
+				print("- Answer for day %d, part 2:\t\033[91mx\033[00m %s" % (day, answer))
+		else:
+			print("- Answer for day %d, part 2:\t\033[93m?\033[00m %s" % (day, answer))
 
 def runPart(day, part, runExample=False):
 	return runDay(day, part, runExample)
 
-def checkAnswer(day, part, answer):
+def getTitle(day):
+	if day == 1: return "Calorie Counting"
+	if day == 2: return "Rock Paper Scissors"
+	if day == 3: return "Rucksack Reorganization"
+	if day == 4: return "Camp Cleanup"
+	if day == 5: return "Supply Stacks"
+	return ""
+
+def getAnswer(day, part, runExample=False):
+
+	exampleAnswers = {
+		1: {1: 24000, 2: 45000},
+		2: {1: 15, 2: 12},
+		3: {1: 157, 2: 70},
+		4: {1: 2, 2: 4},
+		5: {1: 'CMZ', 2: 'MCD'}
+	}
 
 	answers = {
 		1: {1: 75501, 2: 215594},
-		2: {1: 14163, 2: 12091}
+		2: {1: 14163, 2: 12091},
+		3: {1: 8105, 2: 2363},
+		4: {1: 588, 2: 911},
+		5: {1: 'SVFDLGLWV', 2: 'DCVTCVPCL'}
 	}
+
+	if runExample == True:
+		if day in exampleAnswers:
+			if part in exampleAnswers[day]:
+				return exampleAnswers[day][part]
+	else:
+		if day in answers:
+			if part in answers[day]:
+				return answers[day][part]
 
 	return None
 
+def hasAnswer(day, part, answer, runExample=False):
+	return getAnswer(day, part, runExample) is not None
+
+def checkAnswer(day, part, answer, runExample=False):
+
+	goodAnswer = getAnswer(day, part, runExample)
+	return answer == goodAnswer
+
 if __name__ == "__main__":
 
-	print("--- Advent Of Code 2022 ---")
+	print("-----------------------------------------------------------------")
+	print("                                                                 ")
+	print("      _      _             _      ___   __    ___         _      ")
+	print("    /_\  __| |_ _____ _ _| |_   / _ \ / _|  / __|___  __| |___   ")
+	print("   / _ \/ _` \ V / -_) ' \  _| | (_) |  _| | (__/ _ \/ _` / -_)  ")
+	print("  /_/ \_\__,_|\_/\___|_||_\__|  \___/|_|    \___\___/\__,_\___|  ")
+	print("                                                                 ")
+	print("		   ___       __      ___       ___     			")
+	print("		 /'___`\   /'__`\  /'___`\   /'___`\   	      	 	")
+	print("		/\_\ /\ \ /\ \/\ \/\_\ /\ \ /\_\ /\ \  	      		")
+	print("		\/_/// /__\ \ \ \ \/_/// /__\/_/// /__ 	      		")
+	print("		   // /_\ \\ \ \_\ \ // /_\ \  // /_\ \	      		")
+	print("		  /\______/ \ \____//\______/ /\______/	      		")
+	print("		  \/_____/   \/___/ \/_____/  \/_____/ 	      		")
+	print("                                                                 ")
 
+                 
 	if len(sys.argv) == 1:
 		runAll()
 	
 	elif len(sys.argv) == 2:
-		runDay(int(sys.argv[1]))
+		if sys.argv[1] == "example":
+			runAll(True)
+		else:
+			runDay(int(sys.argv[1]))
 
 	elif len(sys.argv) == 3:
 		if sys.argv[2] == "example":
