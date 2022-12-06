@@ -47,7 +47,8 @@ In order to debug and test my code, I've also added the possibility to run a day
      _      _             _      ___   __    ___         _      
     /_\  __| |_ _____ _ _| |_   / _ \ / _|  / __|___  __| |___   
    / _ \/ _` \ V / -_) ' \  _| | (_) |  _| | (__/ _ \/ _` / -_)  
-  /_/ \_\__,_|\_/\___|_||_\__|  \___/|_|    \___\___/\__,_\___|                                                                   
+  /_/ \_\__,_|\_/\___|_||_\__|  \___/|_|    \___\___/\__,_\___|  
+                                                                
 		   ___       __      ___       ___     
 		 /'___`\   /'__`\  /'___`\   /'___`\   
 		/\_\ /\ \ /\ \/\ \/\_\ /\ \ /\_\ /\ \  
@@ -76,5 +77,9 @@ In order to debug and test my code, I've also added the possibility to run a day
 - Day 5 : "Supply Stacks"
 - Answer for day 5, part 1:	✓ SVFDLGLWV
 - Answer for day 5, part 2:	✓ DCVTCVPCL
+-----------------------------------------------------------------
+- Day 6 : "Tuning Trouble"
+- Answer for day 6, part 1:	✓ 1140
+- Answer for day 6, part 2:	✓ 3495
 -----------------------------------------------------------------
 ```

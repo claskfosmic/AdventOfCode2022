@@ -108,6 +108,7 @@ def getTitle(day):
 	if day == 3: return "Rucksack Reorganization"
 	if day == 4: return "Camp Cleanup"
 	if day == 5: return "Supply Stacks"
+	if day == 6: return "Tuning Trouble"
 	return ""
 
 def getAnswer(day, part, runExample=False):
@@ -117,7 +118,8 @@ def getAnswer(day, part, runExample=False):
 		2: {1: 15, 2: 12},
 		3: {1: 157, 2: 70},
 		4: {1: 2, 2: 4},
-		5: {1: 'CMZ', 2: 'MCD'}
+		5: {1: 'CMZ', 2: 'MCD'},
+		6: {1: 7, 2: 19}
 	}
 
 	answers = {
@@ -125,7 +127,8 @@ def getAnswer(day, part, runExample=False):
 		2: {1: 14163, 2: 12091},
 		3: {1: 8105, 2: 2363},
 		4: {1: 588, 2: 911},
-		5: {1: 'SVFDLGLWV', 2: 'DCVTCVPCL'}
+		5: {1: 'SVFDLGLWV', 2: 'DCVTCVPCL'},
+		6: {1: 1140, 2: 3495},
 	}
 
 	if runExample == True:

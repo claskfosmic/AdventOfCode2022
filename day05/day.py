@@ -98,13 +98,20 @@ class puzzle:
 			if line.strip()[0:1] == "[":
 
 				stack = 1;
+
+				# Find all crates (or empty places)
+				#
 				crates = re.findall(r"(\[[(?<crate>A-Z)]\]|\s{3}\s)", line)
 
 				for crate in crates:
 
+					# Create stack if not exists
+					#
 					if not stack in self.stacks:
 						self.stacks[stack] = [];
 
+					# When not empty, add crate
+					#
 					if crate.strip() != "":
 
 						crate = re.sub(r'[^A-Z]', '', crate)
