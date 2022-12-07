@@ -134,5 +134,4 @@ class puzzle:
 ## https://stackoverflow.com/questions/71740593/retrieving-last-value-of-a-python-dictionary
 ## https://www.w3schools.com/python/ref_dictionary_popitem.asp
 ## https://www.w3schools.com/python/gloss_python_remove_dictionary_items.asp
-## 
 ##

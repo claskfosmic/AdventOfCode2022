@@ -59,27 +59,31 @@ In order to debug and test my code, I've also added the possibility to run a day
                                                         
 -----------------------------------------------------------------
 - Day 1 : "Calorie Counting"
-- Answer for day 1, part 1:	✓ 75501
-- Answer for day 1, part 2:	✓ 215594
+- Answer for day 1, part 1:	* 75501 
+- Answer for day 1, part 2:	* 215594 
 -----------------------------------------------------------------
 - Day 2 : "Rock Paper Scissors"
-- Answer for day 2, part 1:	✓ 14163
-- Answer for day 2, part 2:	✓ 12091
+- Answer for day 2, part 1:	* 14163 
+- Answer for day 2, part 2:	* 12091 
 -----------------------------------------------------------------
 - Day 3 : "Rucksack Reorganization"
-- Answer for day 3, part 1:	✓ 8105
-- Answer for day 3, part 2:	✓ 2363
+- Answer for day 3, part 1:	* 8105 
+- Answer for day 3, part 2:	* 2363 
 -----------------------------------------------------------------
 - Day 4 : "Camp Cleanup"
-- Answer for day 4, part 1:	✓ 588
-- Answer for day 4, part 2:	✓ 911
+- Answer for day 4, part 1:	* 588 
+- Answer for day 4, part 2:	* 911 
 -----------------------------------------------------------------
 - Day 5 : "Supply Stacks"
-- Answer for day 5, part 1:	✓ SVFDLGLWV
-- Answer for day 5, part 2:	✓ DCVTCVPCL
+- Answer for day 5, part 1:	* SVFDLGLWV 
+- Answer for day 5, part 2:	* DCVTCVPCL 
 -----------------------------------------------------------------
 - Day 6 : "Tuning Trouble"
-- Answer for day 6, part 1:	✓ 1140
-- Answer for day 6, part 2:	✓ 3495
+- Answer for day 6, part 1:	* 1140 
+- Answer for day 6, part 2:	* 3495 
+-----------------------------------------------------------------
+- Day 7 : "No Space Left On Device"
+- Answer for day 7, part 1:	* 1513699 
+- Answer for day 7, part 2:	* 7991939 
 -----------------------------------------------------------------
 ```

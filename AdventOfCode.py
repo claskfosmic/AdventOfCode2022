@@ -24,8 +24,6 @@ def runAll(runExample=False):
 
 def runDay(day, part=None, runExample=False):
 
-	print("-----------------------------------------------------------------")
-
 	directory = "day{:02d}".format(day)
 	if not os.path.exists("./"+directory):
 		print("Day %d skipped, dir '%s' not found" % (day, directory))
@@ -82,22 +80,30 @@ def runDay(day, part=None, runExample=False):
 		answer = puzzle.part1()
 		if answer is not None and hasAnswer(day, 1, answer, runExample):
 			if checkAnswer(day, 1, answer, runExample):
-				print("- Answer for day %d, part 1:\t\033[92m✓\033[00m %s" % (day, answer))
+				if runExample:
+					print("- Answer for day %d, part 1:\t\033[92m✓\033[00m %s " % (day, answer))
+				else:
+					print("- Answer for day %d, part 1:\t\033[93m*\033[00m %s " % (day, answer))
 			else:
 				print("- Answer for day %d, part 1:\t\033[91mx\033[00m %s" % (day, answer))
 		else:
-			print("- Answer for day %d, part 1:\t\033[93m?\033[00m %s" % (day, answer))
+			print("- Answer for day %d, part 1:\t\033[95m?\033[00m %s" % (day, answer))
 
 	if part==None or part == 2:
 		
 		answer = puzzle.part2()
 		if answer is not None and hasAnswer(day, 2, answer, runExample):
 			if(checkAnswer(day, 2, answer, runExample)):
-				print("- Answer for day %d, part 2:\t\033[92m✓\033[00m %s" % (day, answer))
+				if runExample:
+					print("- Answer for day %d, part 2:\t\033[92m✓\033[00m %s " % (day, answer))
+				else:
+					print("- Answer for day %d, part 2:\t\033[93m*\033[00m %s " % (day, answer))
 			else:
 				print("- Answer for day %d, part 2:\t\033[91mx\033[00m %s" % (day, answer))
 		else:
-			print("- Answer for day %d, part 2:\t\033[93m?\033[00m %s" % (day, answer))
+			print("- Answer for day %d, part 2:\t\033[95m?\033[00m %s" % (day, answer))
+
+	print("-----------------------------------------------------------------")		
 
 def runPart(day, part, runExample=False):
 	return runDay(day, part, runExample)
@@ -109,26 +115,29 @@ def getTitle(day):
 	if day == 4: return "Camp Cleanup"
 	if day == 5: return "Supply Stacks"
 	if day == 6: return "Tuning Trouble"
+	if day == 7: return "No Space Left On Device"
 	return ""
 
 def getAnswer(day, part, runExample=False):
 
 	exampleAnswers = {
-		1: {1: 24000, 2: 45000},
-		2: {1: 15, 2: 12},
-		3: {1: 157, 2: 70},
-		4: {1: 2, 2: 4},
-		5: {1: 'CMZ', 2: 'MCD'},
-		6: {1: 7, 2: 19}
+		1: {1: 24000, 	2: 45000},
+		2: {1: 15, 	2: 12},
+		3: {1: 157, 	2: 70},
+		4: {1: 2, 	2: 4},
+		5: {1: 'CMZ', 	2: 'MCD'},
+		6: {1: 7, 	2: 19},
+		#7: {1: 95437,	2: 24933642}
 	}
 
 	answers = {
-		1: {1: 75501, 2: 215594},
-		2: {1: 14163, 2: 12091},
-		3: {1: 8105, 2: 2363},
-		4: {1: 588, 2: 911},
-		5: {1: 'SVFDLGLWV', 2: 'DCVTCVPCL'},
-		6: {1: 1140, 2: 3495},
+		1: {1: 75501, 		2: 215594},
+		2: {1: 14163, 		2: 12091},
+		3: {1: 8105, 		2: 2363},
+		4: {1: 588, 		2: 911},
+		5: {1: 'SVFDLGLWV', 	2: 'DCVTCVPCL'},
+		6: {1: 1140, 		2: 3495},
+		7: {1: 1513699, 	2: 7991939}
 	}
 
 	if runExample == True:
@@ -167,8 +176,8 @@ if __name__ == "__main__":
 	print("		  /\______/ \ \____//\______/ /\______/	      		")
 	print("		  \/_____/   \/___/ \/_____/  \/_____/ 	      		")
 	print("                                                                 ")
+	print("-----------------------------------------------------------------")
 
-                 
 	if len(sys.argv) == 1:
 		runAll()
 	
