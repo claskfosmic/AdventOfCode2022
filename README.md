@@ -86,4 +86,8 @@ In order to debug and test my code, I've also added the possibility to run a day
 - Answer for day 7, part 1:	* 1513699 
 - Answer for day 7, part 2:	* 7991939 
 -----------------------------------------------------------------
+- Day 8 : "Treetop Tree House"
+- Answer for day 8, part 1:	* 1672 
+- Answer for day 8, part 2:	* 327180 
+-----------------------------------------------------------------
 ```

@@ -17,11 +17,13 @@
 
 import sys, os
 
+#
 def runAll(runExample=False):
 
 	for d in range(1, 31):
 		runDay(d, None, runExample)
 
+#
 def runDay(day, part=None, runExample=False):
 
 	directory = "day{:02d}".format(day)
@@ -33,15 +35,6 @@ def runDay(day, part=None, runExample=False):
 		print("Day %d skipped, file '%s/day.py' not found" % (day, directory))
 		return
 
-	if runExample == True:
-		if not os.path.exists("./"+directory+"/example.txt"):
-			print("Day %d skipped, file '%s/example.txt' not found" % (day, directory))
-			return
-	else:
-		if not os.path.exists("./"+directory+"/input.txt"):
-			print("Day %d skipped, file '%s/input.txt' not found" % (day, directory))
-			return
-
 	module = "day{:02d}.day".format(day)
 
 	try:
@@ -52,32 +45,40 @@ def runDay(day, part=None, runExample=False):
 	except ImportError:
 		return
 
-	# Open text file in read mode and read puzzle input
-	#
-	if runExample == True:
-		input_file = open("./"+directory+"/example.txt", "r")
-	else:
-		input_file = open("./"+directory+"/input.txt", "r")
-
-	puzzle_input = input_file.read()
-	input_file.close()
-
-	if puzzle_input == "":
-		print("Day %d skipped, input from file was empty" % (day, directory))
+	input_files = getInputFiles(directory, runExample)
+	if len(input_files) == 0:
+		print("Day %d skipped, no inputFile(s) found" % (day, directory))
 		return
+
+	dailyPuzzle = None
+
+	if len(input_files) == 1:
+		puzzle_input = getInput(input_files[0])
+
+		if puzzle_input == "":
+			print("Day %d skipped, input from file was empty" % (day, directory))
+			return
+
+		dailyPuzzle = puzzle()
+		dailyPuzzle.setInput(puzzle_input)
+		dailyPuzzle.handleInput()
 
 	if(part != None):
 		print("- Day %d, Part %d : \"%s\"" % (day, part, getTitle(day)))
 	else:
 		print("- Day %d : \"%s\"" % (day, getTitle(day)))
 
-	puzzle = puzzle()
-	puzzle.setInput(puzzle_input)
-	puzzle.handleInput()
-
 	if part==None or part == 1:
 
-		answer = puzzle.part1()
+		if dailyPuzzle != None:
+			answer = dailyPuzzle.part1()
+		else:
+			dailyPuzzle_input_part1 = getInput(input_files[0])
+			dailyPuzzle_part1 = puzzle()
+			dailyPuzzle_part1.setInput(dailyPuzzle_input_part1)
+			dailyPuzzle_part1.handleInput()
+			answer = dailyPuzzle_part1.part1()
+
 		if answer is not None and hasAnswer(day, 1, answer, runExample):
 			if checkAnswer(day, 1, answer, runExample):
 				if runExample:
@@ -90,8 +91,16 @@ def runDay(day, part=None, runExample=False):
 			print("- Answer for day %d, part 1:\t\033[95m?\033[00m %s" % (day, answer))
 
 	if part==None or part == 2:
-		
-		answer = puzzle.part2()
+
+		if dailyPuzzle != None:
+			answer = dailyPuzzle.part2()
+		else:
+			dailyPuzzle_input_part2 = getInput(input_files[1])
+			dailyPuzzle_part2 = puzzle()
+			dailyPuzzle_part2.setInput(dailyPuzzle_input_part2)
+			dailyPuzzle_part2.handleInput()
+			answer = dailyPuzzle_part2.part2()
+
 		if answer is not None and hasAnswer(day, 2, answer, runExample):
 			if(checkAnswer(day, 2, answer, runExample)):
 				if runExample:
@@ -105,9 +114,43 @@ def runDay(day, part=None, runExample=False):
 
 	print("-----------------------------------------------------------------")		
 
+#
 def runPart(day, part, runExample=False):
 	return runDay(day, part, runExample)
 
+#
+def getInputFiles(directory, runExample=False):
+	
+	input_files = [];
+
+	if runExample == True:
+		if os.path.exists("./"+directory+"/example-part1.txt") and os.path.exists("./"+directory+"/example-part2.txt"):
+			input_files.append("./"+directory+"/example-part1.txt")
+			input_files.append("./"+directory+"/example-part2.txt")
+		elif os.path.exists("./"+directory+"/example.txt"):
+			input_files.append("./"+directory+"/example.txt")
+
+	else:
+		if os.path.exists("./"+directory+"/input-part1.txt") and os.path.exists("./"+directory+"/input-part2.txt"):
+			input_files.append("./"+directory+"/input-part1.txt")
+			input_files.append("./"+directory+"/input-part2.txt")
+		elif os.path.exists("./"+directory+"/input.txt"):
+			input_files.append("./"+directory+"/input.txt")
+			
+	return input_files
+
+#
+def getInput(input_file):
+
+	# Open text file in read mode and read puzzle input
+	#
+	file = open(input_file, "r")
+	puzzle_input = file.read()
+	file.close()
+
+	return puzzle_input
+
+#
 def getTitle(day):
 	if day == 1: return "Calorie Counting"
 	if day == 2: return "Rock Paper Scissors"
@@ -116,8 +159,11 @@ def getTitle(day):
 	if day == 5: return "Supply Stacks"
 	if day == 6: return "Tuning Trouble"
 	if day == 7: return "No Space Left On Device"
+	if day == 8: return "Treetop Tree House"
+	if day == 9: return "Rope Bridge"
 	return ""
 
+#
 def getAnswer(day, part, runExample=False):
 
 	exampleAnswers = {
@@ -127,7 +173,25 @@ def getAnswer(day, part, runExample=False):
 		4: {1: 2, 	2: 4},
 		5: {1: 'CMZ', 	2: 'MCD'},
 		6: {1: 7, 	2: 19},
-		#7: {1: 95437,	2: 24933642}
+		7: {1: 95437,	2: 24933642},
+		8: {1: 21, 	2: 8},
+		9: {1: 13, 	2: 36},
+		10: {1: None, 	2: None},
+		11: {1: None, 	2: None},
+		12: {1: None, 	2: None},
+		13: {1: None, 	2: None},
+		14: {1: None, 	2: None},
+		15: {1: None, 	2: None},
+		16: {1: None, 	2: None},
+		17: {1: None, 	2: None},
+		18: {1: None, 	2: None},
+		19: {1: None, 	2: None},
+		20: {1: None, 	2: None},
+		21: {1: None, 	2: None},
+		22: {1: None, 	2: None},
+		23: {1: None, 	2: None},
+		24: {1: None, 	2: None},
+		25: {1: None, 	2: None},
 	}
 
 	answers = {
@@ -137,7 +201,25 @@ def getAnswer(day, part, runExample=False):
 		4: {1: 588, 		2: 911},
 		5: {1: 'SVFDLGLWV', 	2: 'DCVTCVPCL'},
 		6: {1: 1140, 		2: 3495},
-		7: {1: 1513699, 	2: 7991939}
+		7: {1: 1513699, 	2: 7991939},
+		8: {1: 1672, 		2: 327180},
+		9: {1: 6236, 		2: 2449},
+		10: {1: None, 		2: None},
+		11: {1: None, 		2: None},
+		12: {1: None, 		2: None	},
+		13: {1: None, 		2: None},
+		14: {1: None, 		2: None},
+		15: {1: None, 		2: None},
+		16: {1: None, 		2: None},
+		17: {1: None, 		2: None},
+		18: {1: None, 		2: None},
+		19: {1: None, 		2: None},
+		20: {1: None, 		2: None},
+		21: {1: None, 		2: None},
+		22: {1: None, 		2: None},
+		23: {1: None, 		2: None},
+		24: {1: None, 		2: None},
+		25: {1: None, 		2: None},
 	}
 
 	if runExample == True:
@@ -151,9 +233,11 @@ def getAnswer(day, part, runExample=False):
 
 	return None
 
+#
 def hasAnswer(day, part, answer, runExample=False):
 	return getAnswer(day, part, runExample) is not None
 
+#
 def checkAnswer(day, part, answer, runExample=False):
 
 	goodAnswer = getAnswer(day, part, runExample)
@@ -163,7 +247,7 @@ if __name__ == "__main__":
 
 	print("-----------------------------------------------------------------")
 	print("                                                                 ")
-	print("      _      _             _      ___   __    ___         _      ")
+	print("     _      _             _      ___   __    ___         _       ")
 	print("    /_\  __| |_ _____ _ _| |_   / _ \ / _|  / __|___  __| |___   ")
 	print("   / _ \/ _` \ V / -_) ' \  _| | (_) |  _| | (__/ _ \/ _` / -_)  ")
 	print("  /_/ \_\__,_|\_/\___|_||_\__|  \___/|_|    \___\___/\__,_\___|  ")
