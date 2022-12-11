@@ -40,8 +40,8 @@ def runDay(day, part=None, runExample=False):
 
 	try:
 		moduleObj = __import__(module)
-		submodule = getattr(moduleObj, 'day')    # returns the module object "modules.update"
-		puzzle = getattr(submodule, 'puzzle')    # returns the module object "modules.update"
+		submodule = getattr(moduleObj, "day")    # returns the module object "modules.update"
+		puzzle = getattr(submodule, "puzzle")    # returns the module object "modules.update"
 
 	except ImportError:
 		return
@@ -153,16 +153,37 @@ def getInput(input_file):
 
 #
 def getTitle(day):
-	if day == 1: return "Calorie Counting"
-	if day == 2: return "Rock Paper Scissors"
-	if day == 3: return "Rucksack Reorganization"
-	if day == 4: return "Camp Cleanup"
-	if day == 5: return "Supply Stacks"
-	if day == 6: return "Tuning Trouble"
-	if day == 7: return "No Space Left On Device"
-	if day == 8: return "Treetop Tree House"
-	if day == 9: return "Rope Bridge"
-	if day == 10: return "Day 10: Cathode-Ray Tube"
+	titles = {
+		1: "Calorie Counting",
+		2: "Rock Paper Scissors",
+		3: "Rucksack Reorganization",
+		4: "Camp Cleanup",
+		5: "Supply Stacks",
+		6: "Tuning Trouble",
+		7: "No Space Left On Device",
+		8: "Treetop Tree House",
+		9: "Rope Bridge",
+		10: "Day 10: Cathode-Ray Tube",
+		11: "",
+		12: "",
+		13: "",
+		14: "",
+		15: "",
+		16: "",
+		17: "",
+		18: "",
+		19: "",
+		20: "",
+		21: "",
+		22: "",
+		23: "",
+		24: "",
+		25: ""
+	}
+
+	if day in titles:
+		return titles[day]
+
 	return ""
 
 #
@@ -173,12 +194,12 @@ def getAnswer(day, part, runExample=False):
 		2: {1: 15, 	2: 12},
 		3: {1: 157, 	2: 70},
 		4: {1: 2, 	2: 4},
-		5: {1: 'CMZ', 	2: 'MCD'},
+		5: {1: "CMZ", 	2: "MCD"},
 		6: {1: 7, 	2: 19},
 		7: {1: 95437,	2: 24933642},
 		8: {1: 21, 	2: 8},
 		9: {1: 13, 	2: 36},
-		10: {1: 13140, 	2: '\n##..##..##..##..##..##..##..##..##..##..\n###...###...###...###...###...###...###.\n####....####....####....####....####....\n#####.....#####.....#####.....#####.....\n######......######......######......####\n#######.......#######.......#######.....'},
+		10: {1: 13140, 	2: "\n##..##..##..##..##..##..##..##..##..##..\n###...###...###...###...###...###...###.\n####....####....####....####....####....\n#####.....#####.....#####.....#####.....\n######......######......######......####\n#######.......#######.......#######....."},
 		11: {1: None, 	2: None},
 		12: {1: None, 	2: None},
 		13: {1: None, 	2: None},
@@ -201,12 +222,12 @@ def getAnswer(day, part, runExample=False):
 		2: {1: 14163, 		2: 12091},
 		3: {1: 8105, 		2: 2363},
 		4: {1: 588, 		2: 911},
-		5: {1: 'SVFDLGLWV', 	2: 'DCVTCVPCL'},
+		5: {1: "SVFDLGLWV", 	2: "DCVTCVPCL"},
 		6: {1: 1140, 		2: 3495},
 		7: {1: 1513699, 	2: 7991939},
 		8: {1: 1672, 		2: 327180},
 		9: {1: 6236, 		2: 2449},
-		10: {1: 13720, 		2: '\n####.###..#..#.###..#..#.####..##..#..#.\n#....#..#.#..#.#..#.#..#....#.#..#.#..#.\n###..###..#..#.#..#.####...#..#....####.\n#....#..#.#..#.###..#..#..#...#....#..#.\n#....#..#.#..#.#.#..#..#.#....#..#.#..#.\n#....###...##..#..#.#..#.####..##..#..#.'},
+		10: {1: 13720, 		2: "\n####.###..#..#.###..#..#.####..##..#..#.\n#....#..#.#..#.#..#.#..#....#.#..#.#..#.\n###..###..#..#.#..#.####...#..#....####.\n#....#..#.#..#.###..#..#..#...#....#..#.\n#....#..#.#..#.#.#..#..#.#....#..#.#..#.\n#....###...##..#..#.#..#.####..##..#..#."},
 		11: {1: None, 		2: None},
 		12: {1: None, 		2: None	},
 		13: {1: None, 		2: None},
