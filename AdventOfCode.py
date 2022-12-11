@@ -27,6 +27,7 @@ def runAll(runExample=False):
 def runDay(day, part=None, runExample=False):
 
 	directory = "day{:02d}".format(day)
+
 	if not os.path.exists("./"+directory):
 		print("Day %d skipped, dir '%s' not found" % (day, directory))
 		return
@@ -56,7 +57,7 @@ def runDay(day, part=None, runExample=False):
 		puzzle_input = getInput(input_files[0])
 
 		if puzzle_input == "":
-			print("Day %d skipped, input from file was empty" % (day, directory))
+			print("Day %d skipped, input file '%s' was empty" % (day, input_files[0]))
 			return
 
 		dailyPuzzle = puzzle()
@@ -161,6 +162,7 @@ def getTitle(day):
 	if day == 7: return "No Space Left On Device"
 	if day == 8: return "Treetop Tree House"
 	if day == 9: return "Rope Bridge"
+	if day == 10: return "Day 10: Cathode-Ray Tube"
 	return ""
 
 #
@@ -176,7 +178,7 @@ def getAnswer(day, part, runExample=False):
 		7: {1: 95437,	2: 24933642},
 		8: {1: 21, 	2: 8},
 		9: {1: 13, 	2: 36},
-		10: {1: None, 	2: None},
+		10: {1: 13140, 	2: '\n##..##..##..##..##..##..##..##..##..##..\n###...###...###...###...###...###...###.\n####....####....####....####....####....\n#####.....#####.....#####.....#####.....\n######......######......######......####\n#######.......#######.......#######.....'},
 		11: {1: None, 	2: None},
 		12: {1: None, 	2: None},
 		13: {1: None, 	2: None},
@@ -204,7 +206,7 @@ def getAnswer(day, part, runExample=False):
 		7: {1: 1513699, 	2: 7991939},
 		8: {1: 1672, 		2: 327180},
 		9: {1: 6236, 		2: 2449},
-		10: {1: None, 		2: None},
+		10: {1: 13720, 		2: '\n####.###..#..#.###..#..#.####..##..#..#.\n#....#..#.#..#.#..#.#..#....#.#..#.#..#.\n###..###..#..#.#..#.####...#..#....####.\n#....#..#.#..#.###..#..#..#...#....#..#.\n#....#..#.#..#.#.#..#..#.#....#..#.#..#.\n#....###...##..#..#.#..#.####..##..#..#.'},
 		11: {1: None, 		2: None},
 		12: {1: None, 		2: None	},
 		13: {1: None, 		2: None},
