@@ -269,9 +269,11 @@ class puzzle:
 		monkeys = self.input.split("\n\n")
 		for monkey in monkeys:
 
+			# See: https://regex101.com/r/jRNgDg/1
+			#
 			regex = r"Monkey ([0-9]+):\s+Starting items: ([0-9,\s]+)\s{3}Operation: new = (.*)\s(\+|-|\*)\s([0-9]+|old).*\s{3}Test: divisible by ([0-9]+).*If true: throw to monkey ([0-9]+).*If false: throw to monkey ([0-9]+)"
 			matches = re.search(regex, monkey, re.MULTILINE | re.DOTALL)
-
+			
 			self.monkeys[int(matches.groups()[0])] = {
 				"items": list(map(int, matches.groups()[1].split(", "))),
 				"operation": [matches.groups()[2], matches.groups()[3], matches.groups()[4]],
